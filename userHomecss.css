@@ -1,0 +1,156 @@
+body{
+	margin: 0;
+	background-color: #F3FDFF;
+}
+
+#sideNavBar {
+	margin-top: 150px;
+  /*height: 100%;*/
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #5EC4DD;
+  /*background-color: #BBE0EE;*/
+  font-family: 'Alata', sans-serif;
+}
+
+
+#sideNavBar a{
+	cursor: pointer;
+	text-decoration: none;
+	text-align: center;
+	padding: 20px;
+	color: black;
+}
+
+#sideNavBar a:hover{
+	background-color: rgba(0,0,0, 0.3);
+	color: white;
+}
+
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+#upper{
+	z-index: 5;
+	/*margin-top: 20px;*/
+	padding-top: 20px;
+	position: fixed;
+	width: 100%;
+	background-color: #F3FDFF;
+	font-family: 'Alata', sans-serif;
+}
+#upper #user{
+	padding: 10px;
+	padding-right: 20px;
+	margin-right: 20px;
+	float: right;
+	width: 30%;
+	/*border: 2px solid;*/
+	background-color: #CDDEE2;
+}
+
+#user #name{
+	float: left;
+	padding-left: 10px;
+}
+
+#user #id{
+	float: right;
+}
+
+#upper img{
+	padding-left: 20px;
+	float: left;
+	width: 170px;
+}
+
+.header{
+	margin-top: 100px;
+	padding-top: 20px;
+	/*text-align: center;*/
+	padding-left: 45%;
+	/*position: absolute;*/
+	/*top: 200px;*/
+}
+
+.main{
+	margin-left: 10%;
+	width: 85%;
+	margin: auto;
+	position: absolute;
+
+	font-family: 'Alata', sans-serif;
+}
+
+.filters{
+	position: relative;
+	margin-left: 20%;
+	margin-right: 5%;
+	padding: 10px 0px;
+	border: 1px solid grey;
+}
+
+.filters button{
+	margin-left: 30px;
+	cursor: pointer;
+	padding: 2px 10px;
+}
+label{
+	padding-left: 30px;
+}
+
+.jobpost{
+	margin-left: 17%;
+}
+
+.job{
+	width: 100%;
+	display: grid;
+	grid-template-columns: 20% 80%;
+	border: 2px solid grey;
+	margin: 20px 0px;
+}
+.job img{
+	width: 70%;
+	height: 70%;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+.job-content .left{
+	float: left;
+}
+
+.job-content .right{
+	float: right;
+	text-align: right;
+	padding-right: 10px;
+}
+
+.job-content .right button{
+	margin-top: 20px;
+}
