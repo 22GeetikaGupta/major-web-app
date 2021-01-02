@@ -1,0 +1,138 @@
+body{
+	margin: 0;
+	background-color: #F3FDFF;
+}
+
+#sideNavBar {
+	margin-top: 150px;
+  /*height: 100%;*/
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #5EC4DD;
+  /*background-color: #BBE0EE;*/
+  font-family: 'Alata', sans-serif;
+}
+
+
+#sideNavBar a{
+	cursor: pointer;
+	text-decoration: none;
+	text-align: center;
+	color: black;
+	padding: 20px;
+}
+
+#sideNavBar a:hover{
+	background-color: rgba(0,0,0, 0.3);
+	color: white;
+}
+
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.main{
+	margin-left: 10%;
+	width: 100%;
+	position: absolute;
+	font-family: 'Alata', sans-serif;
+}
+
+
+#upper{
+	z-index: 5;
+	/*margin-top: 20px;*/
+	padding-top: 20px;
+	position: fixed;
+	width: 100%;
+	background-color: #F3FDFF;
+	font-family: 'Alata', sans-serif;
+}
+#upper #user{
+	padding: 10px;
+	padding-right: 20px;
+	margin-right: 20px;
+	float: right;
+	width: 30%;
+	/*border: 2px solid;*/
+	background-color: #CDDEE2;
+}
+
+#user #name{
+	float: left;
+	padding-left: 10px;
+}
+
+#user #id{
+	float: right;
+}
+
+#upper img{
+	padding-left: 20px;
+	float: left;
+	width: 170px;
+}
+
+.header{
+	margin-top: 100px;
+	width: 100%;
+	padding-left: 30%;
+	/*position: absolute;*/
+	/*top: 200px;*/
+}
+
+
+.applications{
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+.application{
+	width: 37%;
+	border: solid black;
+	box-shadow: 10px 15px #888888;
+	display: inline-block;
+	border-radius: 10px;
+	margin: 20px;
+	padding: 20px;
+}
+.companyname{
+	text-align: center;
+}
+.sent{
+	float: right;
+	font-size: 15px;
+	font-style: italic;
+	line-height: 0.5px;
+}
+
+.withdraw{
+	border: none;
+	padding: 10px;
+	background-color: #FE8D8A;
+	letter-spacing: 2px;
+	cursor: pointer;
+}
