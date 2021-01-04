@@ -1,0 +1,117 @@
+@import<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap" rel="stylesheet">
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Josefin Sans', sans-serif;
+
+}
+
+body{
+  background:#4682b4;
+}
+.wrapper{
+  margin: 10px;
+  width: calc(100% - 50px);
+  height: calc(100% - 50px);
+  padding: 30px;
+  color: #536895;
+}
+.wrapper .table_title{
+  background: #fff;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  border-radius: 3px;
+  font-weight: 700;
+  font-size:20;
+}
+.wrapper .table_header{
+  color: #a1a1a1;
+}
+.wrapper .item_wrap{
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  align-items: center;
+}
+.wrapper .table_header .item_wrap{
+  border-top-right-radius: 3px;
+  border-top-left-radius:3px;
+}
+.wrapper .table_body .item_wrap:last-child{
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px; 
+}
+.wrapper .table_body .item_wrap{
+  cursor: pointer;
+}
+.wrapper .table_body .item_wrap:hover{
+  background: #e7feff !important;
+}
+.wrapper .item_wrap .item.item_id{
+  width: 5%;
+}
+.wrapper .item_wrap .item.item_resume{
+ width: 10%;
+}
+.wrapper .item_wrap .item.item_name{
+  width: 10%;
+}
+.wrapper .item_wrap .item.item_id{
+  display: flex;
+}
+.wrapper .item_wrap .item.checkbox{
+  display: block;
+  border:1px solid #e0e0e0;
+  width:13px;
+  height: 13px;
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+  }
+
+.wrapper .item_wrap .item.item_name p,
+.wrapper .item_wrap .item.item_job p{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+.wrapper .item_wrap .item_resume.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+@media(max-width:500px){
+  .wrapper .item_wrap .item{
+    width:25%;
+  }
+  .wrapper .item_wrap .item.item_job{
+    display: none;
+  }
+}
+
+@media(max-width:450px){
+  .wrapper .item_wrap .item{
+    width:33%;
+  }
+  .wrapper .item_wrap .item.item_job{
+    display: none;
+  }
+}
