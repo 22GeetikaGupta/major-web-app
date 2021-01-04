@@ -1,0 +1,85 @@
+body{
+	margin: 0px;
+	background-color: #F3FDFF;
+}
+
+nav{
+	display: grid;
+	grid-template-columns: 30% 60% 10%;
+	padding: 20px;
+	padding-bottom: 0px;
+}
+
+.logo{
+	width: 170px;
+}
+
+.button{
+	margin: 10px;
+	padding: 10px;
+	width: 150px;
+	border-radius: 20px;
+	font-family: 'Alata', sans-serif;
+	cursor: pointer;
+	background-color: #38FF60;
+	text-decoration: none;
+	border: none;
+}
+
+.left{
+	text-align: left;
+}
+
+.left h4{
+	font-family: 'Hind Madurai', sans-serif;
+	color: #879B9F;
+	font-size: 20px;
+	padding: 10px;
+}
+
+.left .what{
+	text-align: center;
+	font-family: 'Alata', sans-serif;
+	letter-spacing: 2px;
+}
+.right{
+	text-align: right;
+}
+
+.body{
+	display: grid;
+	grid-template-columns: 60% 40%;
+	padding: 20px;
+	padding-right: 35px;
+}
+
+.body .slogan{
+	font-family: 'Roboto Slab', serif;
+	font-size: 40px;
+	letter-spacing: 5px;
+}
+
+.main{
+	display: grid;
+	grid-template-columns: 50% 50%;
+	padding-right: 20px;
+	padding-left: 20px;
+	font-size: 15px;
+	font-family: 'Roboto Slab', serif;
+}
+.main .company{
+	padding: 5px;
+	text-align: center;
+}
+
+.main .candidate{
+	padding: 5px;
+	text-align: center;
+}
+
+.body .right img{
+	padding: 1px;
+	padding-top: 20px;
+	padding-left: 10px;
+	width: 100%;
+}

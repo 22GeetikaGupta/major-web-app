@@ -1,0 +1,326 @@
+body{
+	margin: 0;
+	background-color: #F3FDFF;
+}
+
+#sideNavBar {
+	margin-top: 150px;
+  /*height: 100%;*/
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #5EC4DD;
+  /*background-color: #BBE0EE;*/
+  font-family: 'Alata', sans-serif;
+}
+
+
+#sideNavBar a{
+	cursor: pointer;
+	text-decoration: none;
+	text-align: center;
+	padding: 20px;
+	color: black;
+}
+
+#sideNavBar a:hover{
+	background-color: rgba(0,0,0, 0.3);
+	color: white;
+}
+
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+#upper{
+	z-index: 5;
+	/*margin-top: 20px;*/
+	padding-top: 20px;
+	position: fixed;
+	width: 100%;
+	background-color: #F3FDFF;
+	font-family: 'Alata', sans-serif;
+}
+#upper #user{
+	padding: 10px;
+	padding-right: 20px;
+	margin-right: 20px;
+	float: right;
+	width: 30%;
+	/*border: 2px solid;*/
+	background-color: #CDDEE2;
+}
+
+#user #name{
+	float: left;
+	padding-left: 10px;
+}
+
+#user #id{
+	float: right;
+}
+
+#upper img{
+	padding-left: 20px;
+	float: left;
+	width: 170px;
+}
+
+.main{
+	margin-left: 10%;
+	width: 85%;
+	top: 150px;
+	position: absolute;
+	background-color: white;
+	/*height: 800px;*/
+	border: 1px solid black;
+	font-family: 'Alata', sans-serif;
+}
+
+.main .navbar{
+	margin: 0px 20px;
+	display: grid;
+	grid-template-columns: 4% 23% 23% 23% 23% 4%;
+	text-align: center;
+	
+}
+
+.main .navbar .menu{
+	border: 1px solid grey;
+	padding: 20px 0px;
+	margin-bottom: 0px;
+	background-color: #E9EBEC;
+	cursor: pointer;
+}
+.main .navbar .resume{
+	cursor: auto;
+	border-left: none;
+	border-top: none;
+	border-bottom: 1px solid grey;
+	background-color: white;
+	padding: 20px 0px;
+	margin-bottom: 0px;
+}
+
+.main .pages{
+	/*width: 100%;*/
+	/*padding: 20px;*/
+	margin: 0px 20px;
+	top: 0px;
+	padding-top: 0px;
+	border-left: 1px solid grey;
+	border-right: 1px solid grey;
+	border-bottom: 1px solid grey;
+	margin-bottom: 20px;
+
+}
+
+.main .navbar .aboutmenu{
+	background-color: white;
+	border-bottom: none;
+}
+
+.main .about{
+	padding: 20px;
+}
+
+.savebutton{
+	width: 100%;
+	padding: 10px;
+}
+
+.savebutton button{
+	margin-left: 90%;
+}
+.details{
+	margin: 10px;
+}
+
+.details .row{
+	display: grid;
+	grid-template-columns: 30% 70%;
+	margin-bottom: 10px;
+}
+
+.details .row input{
+	margin: 10px 10px;
+	border: none;
+	background-color: #F3F5F6;
+	padding: 0px 10px;
+	color: black;
+	font-size: 15px;
+}
+
+.details .row select{
+	margin: 10px 10px;
+	border: none;
+	background-color: #F3F5F6;
+	padding: 0px 10px;
+	color: black;
+	font-size: 15px;
+}
+
+.details .row textarea{
+	margin: 10px 10px;
+	border: none;
+	background-color: #F3F5F6;
+	padding: 0px 10px;
+	color: black;
+	font-size: 15px;
+}
+
+.details .row:hover{
+	background-color: #F3F5F6;
+}
+
+
+
+.main .academics{
+	display: none;
+}
+
+.acad{
+	padding: 10px 20px;
+	/*width: 100%;*/
+	border-bottom: 1px solid grey;
+	margin: 10px 20px;	
+	margin-bottom: 30px;
+}
+
+.acad button{
+	float: right;
+}
+
+.modal {
+  display: none;
+  position: fixed; 
+  z-index: 10; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%; 
+  overflow: auto;
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+  padding-top: 60px;
+}
+
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+
+.container {
+  padding: 16px;
+}
+
+.container input[type=text]{
+	float: right;
+	width: 70%;
+	padding: 5px;
+}
+
+.container input[type=number]{
+	float: right;
+	width: 70%;
+	padding: 5px;
+}
+
+.container select{
+	float: right;
+	width: 70%;
+	padding: 5px;
+}
+
+.container input[type=Date]{
+	float: right;
+	width: 50%;
+	padding: 5px;
+}
+
+
+.container .row{
+	width: 100%;
+	margin-top: 20px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto;
+  border: 1px solid #888;
+  width: 50%; 
+}
+
+
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+.educate{
+	margin: 20px;
+	border: 1px solid grey;
+	padding: 10px;
+}
+
+.educate p{
+	line-height: 1px;
+}
+
+.educate button{
+	float: right;
+}
+
+.modal .row textarea{
+	width: 100%;
+}
+
+.exp{
+	margin: 20px;
+	border: 1px solid grey;
+	padding: 10px;
+}
+
+.exp button{
+	float: right;
+}
+
+.main .skills{
+	display: none;
+}
+.main .achievements{
+	display: none;
+}
+
