@@ -12,6 +12,103 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	<body>
+		<div id="id01" class="modal">
+  
+		  <form class="modal-content animate" action="/action_page.php" method="post">
+		  
+		    <div class="container">
+		    	<div class="row">
+		      <label for="Institute"><b>Institute Name : </b></label>
+		      <input type="text" name="Institute" id="Institute" required></div>
+
+		      <div class="row">
+		      <label for="program"><b>Program</b></label>
+		      <select id="program" name="program" required>
+		      	<option value="B.E/B.Tech.">B.E/B.Tech.</option>
+		      	<option value="M.Tech.">M.Tech.</option>
+		      	<option value="MCA">MCA</option>
+		      	<option value="MSC">MSC</option>
+		      </select>
+		        </div>
+
+		        <div class="row">
+		      <label for="Start"><b>Start date : </b></label>
+		      <input type="Date" name="Start" id="Start" required> 
+		  		</div>
+
+		  		<div class="row">
+		      <label for="End"><b>End date : </b></label>
+		      <input type="Date" name="End" id="End" required> 
+		  		</div>
+
+		  		<div class="row">
+		      <label for="Scale"><b>Grade Scale : </b></label>
+		      <select name="Scale" id="Scale" required> 
+		      		<option value="Out of 10.0">CGPA Out of 10.0</option>
+		      		<option value="Out of 4.0">CGPA Out of 4.0</option>
+		      		<option value="Perentage">Percentage</option>
+		      </select>
+		  		</div>
+
+		  		<div class="row">
+		      <label for="Grade"><b>Grade Obtained : </b></label>
+		      <input type="number" step="0.1" name="Grade" id="Grade" required> 
+		  		</div>
+
+		  		<div class="row">
+		      <label for="major1"><b>Major Subject I :</b></label>
+		      <input type="text" name="major1" id="major1" required> 
+		  		</div>
+
+		  		<div class="row">
+		      <label for="major2"><b>Major Subject II : </b></label>
+		      <input type="text" name="major2" id="major2"> 
+		  		</div>
+
+		    </div>
+
+		    <div class="container" style="background-color:#f1f1f1">
+		      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+		      <button type="button" onclick=saveEducation() class="cancelbtn">Save</button>
+		    </div>
+		  </form>
+		</div>
+
+		<div id="id02" class="modal">
+  
+		  <form class="modal-content animate" action="/action_page.php" method="post">
+		  
+		    <div class="container">
+		    	<div class="row">
+		      <label for="Company"><b>Company Name : </b></label>
+		      <input type="text" name="Company" id="company" required></div>
+
+		        <div class="row">
+		      <label for="Start1"><b>Start date : </b></label>
+		      <input type="Date" name="Start1" id="Start1" required> 
+		  		</div>
+
+		  		<div class="row">
+		      <label for="End1"><b>End date : </b></label>
+		      <input type="Date" name="End1" id="End1" required> 
+		  		</div>
+
+
+		  		<div class="row">
+					<p><b>Description : </b></p>
+					<textarea rows=15 id="desc" placeholder="Write something about yourself..."></textarea>
+						
+				</div>
+
+		    </div>
+
+		    <div class="container" style="background-color:#f1f1f1">
+		      <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+		      <button type="button" onclick=saveExperience() class="cancelbtn">Save</button>
+		    </div>
+		  </form>
+		</div>
+
 		<div id="sideNavBar">
 				<a href="userHome.html" class="tooltip"><i class="fa fa-home fa-lg"></i><span class="tooltiptext">Home</span></a>
 				<a href="userProfile.html" class="tooltip"><i class="fa fa-user-circle fa-lg"></i><span class="tooltiptext">Profile</span></a>
@@ -36,7 +133,7 @@
 			</div>
 			
 			<div class="about pages">
-				<div class="button">
+				<div class="savebutton">
 					<button>Save changes</button>
 				</div>
 				<div class="details">
@@ -61,6 +158,16 @@
 					</div>
 
 					<div class="row">
+						<p>Date Of Birth : </p>
+						<input type=date placeholder="DD/MM/YYYY">
+					</div>
+
+					<div class="row">
+						<p>Address : </p>
+						<input type=text placeholder="City, State, Country">
+					</div>
+
+					<div class="row">
 						<p>Gender : </p>
 						<select name="gender" id="gender">
 							<option value=""></option>
@@ -76,13 +183,34 @@
 						<textarea rows=15 placeholder="Write something about yourself..."></textarea>
 						
 					</div>
-
+					
 
 				</div>
 				
 			</div>
 			<div class="academics pages">
-				
+				<div class="savebutton">
+					<!-- <button>Save changes</button> -->
+				</div>
+				<div class="education">
+					<div class="acad">
+						Education Details:
+						<button onclick=addEducation()>Add Education</button>
+					</div>
+					<div class="edu">
+						
+					</div>
+				</div>
+
+				<div class="experience">
+					<div class="acad">
+					Work Experience:
+					<button onclick=addExperience()>Add Experience</button></div>
+
+					<div class="experiences">
+						
+					</div>
+				</div>
 			</div>
 			<div class="skills pages">
 				
@@ -91,6 +219,7 @@
 				
 			</div>
 		
+
 		</div>
 		<script src="userProfilejs.js"></script>
 	</body>
