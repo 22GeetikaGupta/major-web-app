@@ -111,3 +111,36 @@ var deleteexp = (id) =>{
 	console.log(id);
 	id.style.display = "none";
 }
+
+var close = [true, true];
+
+var dropmenu = (id) => {
+	if(close[id-1]){
+		for(var i=0; i<close.length; i++){
+			document.getElementsByClassName('dropdown')[i].style.display = 'none';
+			close[i-1] = true;
+		}
+		document.getElementsByClassName('dropdown')[id-1].style.display = 'block';
+		close[id-1] = false;
+	}
+	else{
+		document.getElementsByClassName('dropdown')[id-1].style.display = 'none';
+		close[id-1] = true;
+	}
+	
+}
+
+function addprop(id) {
+	var obj = document.getElementsByClassName('dropdown')[id-1].childNodes;
+
+	console.log(obj.length/2);
+	document.getElementsByClassName('input')[id-1].innerHTML = "";
+	for(var i=0; i<(obj.length/2)-1; i++){
+		console.log(i);
+		var obj2 = obj[2*i + 1].childNodes;
+		if(obj2[0].checked){
+			document.getElementsByClassName('input')[id-1].innerHTML += `<span style="background-color: #EAEFF1; padding-left: 5px; padding-right: 5px; margin-left: 5px; margin-bottom: 5px;"> ${obj2[1].data} </span>`;
+		}
+	}
+	
+}

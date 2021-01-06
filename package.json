@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/22GeetikaGupta/major-web-app/issues"
   },
-  "homepage": "https://github.com/22GeetikaGupta/major-web-app#readme"
+  "homepage": "https://github.com/22GeetikaGupta/major-web-app#readme",
+  "dependencies": {}
 }

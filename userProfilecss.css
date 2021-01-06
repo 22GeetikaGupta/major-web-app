@@ -320,6 +320,36 @@ body{
 .main .skills{
 	display: none;
 }
+
+.skill .row{
+	display: grid;
+	padding: 0px 20px;
+	margin-bottom: 10px;
+	grid-template-columns: 30% 70%;
+}
+
+.skill .row p{
+	margin-top: 0em;
+}
+.skill .row .select{
+	width: 100%;
+}
+
+.row .select .input{
+	padding: 10px;
+	border: 1px solid grey;
+}
+
+.row .select .dropdown{
+	position: absolute;
+	width: 65%;
+	max-height: 300px;
+	overflow-y: scroll;
+	display: none;
+	background-color: white;
+	border: 1px solid grey;
+	z-index: 10;
+}
 .main .achievements{
 	display: none;
 }
