@@ -1,4 +1,4 @@
-function open() {
-    var x = document.getElementById('modal');
-    x.style.display = 'block';
+console.log("hello");
+var open1 = () => {
+    document.getElementById('modal').style.display = 'block';
 }
