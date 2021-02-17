@@ -7,7 +7,7 @@
 
 <body>
     <div class="container">
-        <form action="/action_page.php">
+            <%=message%>
             <div class="row">
 
                 <div class="vl">
@@ -15,44 +15,62 @@
                 </div>
 
                 <div class="col">
-
-                    <div class="form">
-                        <h2>Register Here</h2>
-                        <div class="input_field">
-                            <label>Username</label>
-                            <input type="text" class="input">
+                    <form action = "/register" method = "POST">
+                        <div class="form">
+                            <h2>Register Here</h2>
+                            <div class="input_field">
+                                <label>Username</label>
+                                <input type="text" class="input" name = "username">
+                            </div>
+                            <div class="input_field">
+                                <label>Company Name</label>
+                                <input type="text" class="input" name = "companyname">
+                            </div>
+                            <div class="input_field">
+                                <label>Email</label>
+                                <input type="text" class="input" name = "email">
+                            </div>
+                            <div class="input_field">
+                                <label>Phone</label>
+                                <input type="text" class="input" name = "phone">
+                            </div>
+                            <div class="input_field">
+                                <label>Address</label>
+                                <input type="text" class="input" name = "address">
+                            </div>
+                            <div class="input_field">
+                                <label>Password</label>
+                                <input type="Password" class="input" name = "password">
+                            </div>
+                            <div class="input_field">
+                                <label>Confirm Password</label>
+                                <input type="Password" class="input" name = "confirmpassword">
+                            </div>
+                            <div>
+                                <h2>Register as:</h2>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="label" for="company">Company</label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="radio" id="company" type="radio" name="option" value = "company">
+                                    </div>
+                                    <div class="col">
+                                        <label class="label" for="user">User </label>
+                                    </div>
+                                    <div class="col">
+                                        <input class="radio" id="user" type="radio" name="option", value = "user">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inputfield">
+                                <input type="submit" value="Register" class="btn">
+                            </div>
                         </div>
-                        <div class="input_field">
-                            <label>Company Name</label>
-                            <input type="text" class="input">
-                        </div>
-                        <div class="input_field">
-                            <label>Email</label>
-                            <input type="text" class="input">
-                        </div>
-                        <div class="input_field">
-                            <label>Phone</label>
-                            <input type="text" class="input">
-                        </div>
-                        <div class="input_field">
-                            <label>Address</label>
-                            <input type="text" class="input">
-                        </div>
-                        <div class="input_field">
-                            <label>Password</label>
-                            <input type="text" class="input">
-                        </div>
-                        <div class="input_field">
-                            <label>Confirm Password</label>
-                            <input type="Password" class="input">
-                        </div>
-
-                        <div class="inputfield">
-                            <input type="submit" value="Register" class="btn">
-
-                        </div>
-                    </div>
+                    </form>
                 </div>
+               
+
                 <div class="col partition">
 
                 </div>
@@ -74,16 +92,16 @@
                             <h2>Login as:</h2>
                             <div class="row">
                                 <div class="col">
-                                    <label class="label" for="company">Company</label>
+                                    <label class="label" for="logcompany">Company</label>
                                 </div>
                                 <div class="col">
-                                    <input class="radio" id="company" type="radio" name="option">
+                                    <input class="radio" id="logcompany" type="radio" name="option">
                                 </div>
                                 <div class="col">
-                                    <label class="label" for="user">User </label>
+                                    <label class="label" for="loguser">User </label>
                                 </div>
                                 <div class="col">
-                                    <input class="radio" id="user" type="radio" name="option">
+                                    <input class="radio" id="loguser" type="radio" name="option">
                                 </div>
 
 
@@ -95,8 +113,8 @@
                 </form>
             </div>
 
-    </div>
-    </form>
+       
+       
     </div>
 
 

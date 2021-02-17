@@ -18,6 +18,8 @@
   "homepage": "https://github.com/22GeetikaGupta/major-web-app#readme",
   "dependencies": {
     "ejs": "^3.1.6",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "knex": "^0.21.17",
+    "mysql": "^2.18.1"
   }
 }
