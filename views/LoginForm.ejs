@@ -7,7 +7,7 @@
 
 <body>
     <div class="container">
-            <%=message%>
+           
             <div class="row">
 
                 <div class="vl">
@@ -74,19 +74,21 @@
                 <div class="col partition">
 
                 </div>
-                <form>
+                <form action = "/login" method = "POST">
                     <div class="col">
                         <h2>Login Here</h2>
 
                         <div class="input-field">
                             <label>Username</label>
-                            <input type="text" class="input">
+                            <input type="text" class="input" name="username">
                         </div>
                         <div class="input-field">
                             <label>Password</label>
-                            <input type="text" class="input">
+                            <input type="text" class="input" name="password">
                         </div>
-
+                        <div class="message">
+                            <%=message%>
+                        </div>
                         <input type="submit" value="Login">
                         <div>
                             <h2>Login as:</h2>
@@ -95,13 +97,13 @@
                                     <label class="label" for="logcompany">Company</label>
                                 </div>
                                 <div class="col">
-                                    <input class="radio" id="logcompany" type="radio" name="option">
+                                    <input class="radio" id="logcompany" type="radio" name="option" value="company">
                                 </div>
                                 <div class="col">
                                     <label class="label" for="loguser">User </label>
                                 </div>
                                 <div class="col">
-                                    <input class="radio" id="loguser" type="radio" name="option">
+                                    <input class="radio" id="loguser" type="radio" name="option" value="user">
                                 </div>
 
 
