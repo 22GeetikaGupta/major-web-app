@@ -5,61 +5,70 @@
     <link rel="stylesheet" href="/public/styles/LoginFormStyle.css">
 </head>
 
-<body>
+<body onload="defaultval()">
     <div class="container">
+           <div class="temp">
+            <p class="name2"><%=name2%></p>
+               <p class="email1"><%=email1%></p>
+               <p class="comp1"><%=comp1%></p>
+               <p class="phone2"><%=phone2%></p>
+               <p class="address2"><%=address2%></p>
+           </div>
            
             <div class="row">
-
-                <div class="vl">
-
-                </div>
-
-                <div class="col">
+                <div class="col register">
+                    <p class="alertMsg">
+                        <%=alertMsg%>
+                    </p>
                     <form action = "/register" method = "POST">
                         <div class="form">
                             <h2>Register Here</h2>
                             <div class="input_field">
                                 <label>Username</label>
-                                <input type="text" class="input" name = "username">
+                                <input type="text" class="input username" name = "username" required>
                             </div>
                             <div class="input_field">
                                 <label>Company Name</label>
-                                <input type="text" class="input" name = "companyname">
+                                <input type="text" class="input company" name = "companyname">
                             </div>
                             <div class="input_field">
                                 <label>Email</label>
-                                <input type="text" class="input" name = "email">
+                                <input type="email" class="input emailid" name = "email" required>
                             </div>
                             <div class="input_field">
                                 <label>Phone</label>
-                                <input type="text" class="input" name = "phone">
+                                <input type="tel" class="input telephone" name = "phone" required>
                             </div>
                             <div class="input_field">
                                 <label>Address</label>
-                                <input type="text" class="input" name = "address">
+                                <input type="text" class="input address" name = "address">
                             </div>
                             <div class="input_field">
                                 <label>Password</label>
-                                <input type="Password" class="input" name = "password">
+                                <input type="Password" class="input" name = "password" id="pswd" oninput="checkstrength()" required>
+                                <p class="pswdStrength msg"></p>
                             </div>
                             <div class="input_field">
                                 <label>Confirm Password</label>
-                                <input type="Password" class="input" name = "confirmpassword">
+                                <input type="Password" class="input" name = "confirmpassword" id="confirmpswd" oninput="pswdEqual()" required>
+                                <p class="pswdEqual msg"></p>
                             </div>
+
                             <div>
-                                <h2>Register as:</h2>
+                                <h4>Register as:</h4>
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="combo">
+                                        
                                         <label class="label" for="company">Company</label>
-                                    </div>
-                                    <div class="col">
                                         <input class="radio" id="company" type="radio" name="option" value = "company">
+                                        
                                     </div>
-                                    <div class="col">
-                                        <label class="label" for="user">User </label>
-                                    </div>
-                                    <div class="col">
+                                    <div class="combo">
+                                        
+                                        <label class="label" for="user">Candidate </label>
+        
                                         <input class="radio" id="user" type="radio" name="option", value = "user">
+                                     
                                     </div>
                                 </div>
                             </div>
@@ -71,11 +80,12 @@
                 </div>
                
 
-                <div class="col partition">
+                <!-- <div class="col partition">
 
-                </div>
+                </div> -->
+                <div class="col login">
                 <form action = "/login" method = "POST">
-                    <div class="col">
+                    
                         <h2>Login Here</h2>
 
                         <div class="input-field">
@@ -89,35 +99,35 @@
                         <div class="message">
                             <%=message%>
                         </div>
-                        <input type="submit" value="Login">
+                       
                         <div>
-                            <h2>Login as:</h2>
+                            <h4>Login as:</h4>
                             <div class="row">
-                                <div class="col">
+                                <div class="combo">
                                     <label class="label" for="logcompany">Company</label>
-                                </div>
-                                <div class="col">
+                                
                                     <input class="radio" id="logcompany" type="radio" name="option" value="company">
                                 </div>
-                                <div class="col">
-                                    <label class="label" for="loguser">User </label>
-                                </div>
-                                <div class="col">
+                                <div class="combo">
+                                    <label class="label" for="loguser">Candidate </label>
+                               
                                     <input class="radio" id="loguser" type="radio" name="option" value="user">
                                 </div>
 
 
                             </div>
                         </div>
-
+                         <input type="submit" value="Login">
+                            </form>
                     </div>
 
-                </form>
+                
             </div>
 
        
        
     </div>
 
-
+<script src="public/scripts/register.js"></script>
 </body>
+</html>

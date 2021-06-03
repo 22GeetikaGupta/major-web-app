@@ -7,6 +7,7 @@ var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt');
 
+
 knex = knex({
 	client: 'mysql',
 	connection: {
@@ -58,9 +59,14 @@ function redirecthome(req, res, next)
 app.get('/', function (req, res) {
 
 		var username = "";
-		if(req.session.username) username = req.session.username;
-
-		res.render('home.ejs', {username:username});
+		if(req.session.username) {
+			username = req.session.username;
+			res.render('userHome.ejs', {username:username});
+		}
+		else{
+			res.render('home.ejs', {username : username});
+		}
+		
 	
   
 })
@@ -71,7 +77,14 @@ app.get('/login', function (req, res) {
 		res.redirect('/userHome');
 	}
 	else
-  		res.render('LoginForm.ejs', {message : ""});
+  		res.render('LoginForm.ejs', {message : "",
+  									 alertMsg: "",
+  									 email1 : "",
+  									 comp1 : "",
+  									 address2 : "",
+  									 phone2 : "",
+  									 name2 : ""
+  									});
 })
 
 app.post("/login", function(req, res){
@@ -85,7 +98,6 @@ app.post("/login", function(req, res){
 				res.render('LoginForm.ejs', {message : "Wrong username/password"});
 			}
 			else{
-
 				req.session.username = obj.username;
 				req.session.loggedin = true;
 				res.redirect("/userHome");
@@ -97,27 +109,71 @@ app.post("/login", function(req, res){
 
 app.post("/register", function (req, res){
 	var obj = req.body;
+	console.log(obj);
 	if(obj.password != obj.confirmpassword)
 	{
-		res.send("Passwords do not match");
+		console.log("password do not match");
+		res.render('Loginform.ejs', {message:"", alertMsg:"*Registration failed as passwords do not match!!"})
+		
 	}
 	else
 	{
-		knex("logintable").insert({
-			username: obj.username, 
-			companyname: obj.companyname,
-			emailid: obj.email,
-			phoneno: obj.phone,
-			address: obj.address,
-			password: obj.password,
-			type: obj.option
+		knex("logintable").select('emailid', 'Username').where('emailid', '=', obj.email)
+		.then(data => {
+			if(data.length != 0){
+				res.render('LoginForm.ejs', {message:"", 
+											alertMsg : "Email already Registered!!",
+											email1 : "",
+		  									comp1 : obj.companyname,
+		  									address2 : obj.address,
+		  									phone2 : obj.phone,
+		  									name2 : obj.username
+										});
+			}
+			else{
+				knex("logintable").select('Username').where('Username', '=', obj.username)
+				.then(data=>{
+					if(data.length != 0){
+						res.render('Loginform.ejs', {message : "", 
+													alertMsg:"Username already taken!!",
+													email1 : obj.email,
+				  									comp1 : obj.companyname,
+				  									address2 : obj.address,
+				  									phone2 : obj.phone,
+				  									name2 : ""
+												});
+					}
+					else{
+						console.log("inserting..........");
+						knex("logintable").insert({
+							username: obj.username, 
+							companyname: obj.companyname,
+							emailid: obj.email,
+							phoneno: obj.phone,
+							address: obj.address,
+							password: obj.password,
+							type: obj.option
+						})
+						.then(()=>{
+							res.render('Loginform.ejs', {message:"", 
+														alertMsg: "User Registered Successfully. Now user may login",
+														email1 : "",
+					  									 comp1 : "",
+					  									 address2 : "",
+					  									 phone2 : "",
+					  									 name2 : ""
+													});
+						})
+						.catch(err=>{
+							res.send("check you terminal for errors!!");
+							console.log(err);
+						})
+					}
+				})
+				
+			}
 		})
-		.then(()=>{
-			res.render('Loginform.ejs', {message: "User Registered Successfully. Now user may login"});
-		})
-		.catch(err=>{
-			console.log(err);
-		})
+		
 	}
 
 });
@@ -127,7 +183,9 @@ app.get('/login2', function (req, res) {
 })
 
 app.get('/userhome', function (req, res) {
-  res.render('userHome.ejs')
+	var username="";
+	if(req.session.username) username=req.session.username;
+  res.render('userHome.ejs', {username : username});
 })
 
 app.get('/userprofile', function (req, res) {
