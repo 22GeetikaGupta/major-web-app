@@ -15,6 +15,7 @@
         <!-- Header -->
         <div id="header">
             <a id="logo" href="/"><img src="/public/jobs.png"></a>
+            <p class="company"><%=company%></p>
         </div>
 
 
@@ -24,8 +25,8 @@
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">New Job</a></li>
-                    <li><a href="#">Logout</a></li>
                     <li><a href="#">About Us</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
             </div>
             <!-- Jobs Card -->
@@ -93,19 +94,19 @@
 
             <div id="modal">
                 <form id="modal-content">
-                    <div class="row">
+                    <div class="row1">
                         <label class="label" for="name">Job Name:</label>
                         <input class="input" id="name" type="text" name="name" placeholder="Software Engineer">
                     </div>
-                    <div class="row">
+                    <div class="row1">
                         <label class="label" for="location">Location:</label>
                         <input class="input" id="location" type="text" name="location" placeholder="Bhopal">
                     </div>
-                    <div class="row">
+                    <div class="row1">
                         <label class="label " for="about">About Job</label>
                         <input class="input  about" id="about" type="textarea" name="about" placeholder="Details of the job">
                     </div>
-                    <div class="row">
+                    <div class="row1">
                         <label class="label requirements" for="label">Job Requirements</label>
                         <input class="input about" id="input" type="textarea" name="name" placeholder="Requirements">
                     </div>

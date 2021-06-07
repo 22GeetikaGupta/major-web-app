@@ -1,4 +1,3 @@
-
 var express = require('express')
 var app = express()
 const path = require('path');
@@ -61,7 +60,13 @@ app.get('/', function (req, res) {
 		var username = "";
 		if(req.session.username) {
 			username = req.session.username;
-			res.render('userHome.ejs', {username:username});
+			if(req.session.type=='company'){
+				res.redirect('/companyHome');
+			}
+			else{
+				res.redirect('/userHome');
+			 // res.render('userHome.ejs', {username:username});
+			}
 		}
 		else{
 			res.render('home.ejs', {username : username});
@@ -91,16 +96,29 @@ app.post("/login", function(req, res){
 
 	var obj = req.body;
 	console.log(obj);
-	knex("logintable").select('Username', 'Password').where('Username', '=', obj.username)
+	knex("logintable").select('Username', 'Password', 'Type').where('Username', '=', obj.username)
 	.then(data => {
 			console.log("hey this is data", data);
-			if(data.length==0 ||data[0].Password != obj.password){
-				res.render('LoginForm.ejs', {message : "Wrong username/password"});
+			if(data.length==0 ||data[0].Password != obj.password || data[0].Type != obj.option){
+				res.render('LoginForm.ejs', {message : "Wrong username/password",
+											alertMsg : "",
+											email1 : "",
+		  									comp1 : "",
+		  									address2 : "",
+		  									phone2 : "",
+		  									name2 : ""
+											});
 			}
 			else{
 				req.session.username = obj.username;
+				req.session.type = obj.option;
 				req.session.loggedin = true;
-				res.redirect("/userHome");
+				if(obj.option == 'company'){
+					res.redirect("/companyHome");
+				}
+				else{
+					res.redirect("/userHome");
+				}
 			}
 		
 	})
@@ -144,7 +162,6 @@ app.post("/register", function (req, res){
 												});
 					}
 					else{
-						console.log("inserting..........");
 						knex("logintable").insert({
 							username: obj.username, 
 							companyname: obj.companyname,
@@ -192,12 +209,13 @@ app.get('/userprofile', function (req, res) {
   res.render('userProfile.ejs')
 })
 
-app.get('/appliedJobs', redirecthome, function (req, res) {
+app.get('/appliedJobs', function (req, res) {
+	console.log("applied jobs");
   res.render('appliedJobs.ejs')
 })
  
 app.get('/companyHome', function (req, res) {
-  res.render('HomeCompany.ejs')
+  res.render('HomeCompany.ejs', {company : req.session.username})
 })
 
 app.get('/viewt', function (req, res) {
