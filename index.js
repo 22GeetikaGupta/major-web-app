@@ -28,16 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/public', express.static(path.join(__dirname,'static')));
-/*
 
-knex('userdetails')
-	.select('EmailId').where('SrNo', '=', 1)
-	.then(data=>{
-		console.log(data);
-
-	})
-
-	*/
 
 app.set('view engine', 'ejs');
 
@@ -131,12 +122,19 @@ app.post("/register", function (req, res){
 	if(obj.password != obj.confirmpassword)
 	{
 		console.log("password do not match");
-		res.render('Loginform.ejs', {message:"", alertMsg:"*Registration failed as passwords do not match!!"})
+		res.render('Loginform.ejs', {message:"", 
+									alertMsg:"*Registration failed as passwords do not match!!",
+									email1 : obj.email,
+  									comp1 : obj.companyname,
+  									address2 : obj.address,
+  									phone2 : obj.phone,
+  									name2 : obj.username
+								})
 		
 	}
 	else
 	{
-		knex("logintable").select('emailid', 'Username').where('emailid', '=', obj.email)
+		knex("logintable").select('email', 'Username').where('email', '=', obj.email)
 		.then(data => {
 			if(data.length != 0){
 				res.render('LoginForm.ejs', {message:"", 
@@ -165,14 +163,21 @@ app.post("/register", function (req, res){
 						knex("logintable").insert({
 							username: obj.username, 
 							companyname: obj.companyname,
-							emailid: obj.email,
+							email: obj.email,
 							phoneno: obj.phone,
 							address: obj.address,
 							password: obj.password,
 							type: obj.option
 						})
 						.then(()=>{
-							res.render('Loginform.ejs', {message:"", 
+							knex("userdetails").insert({
+								username : obj.username,
+								name : obj.companyname,
+								email : obj.email,
+								'Phone no': obj.phone,
+								Address : obj.address
+							}).then(()=>{
+								res.render('Loginform.ejs', {message:"", 
 														alertMsg: "User Registered Successfully. Now user may login",
 														email1 : "",
 					  									 comp1 : "",
@@ -180,6 +185,8 @@ app.post("/register", function (req, res){
 					  									 phone2 : "",
 					  									 name2 : ""
 													});
+							})
+							
 						})
 						.catch(err=>{
 							res.send("check you terminal for errors!!");
@@ -206,7 +213,27 @@ app.get('/userhome', function (req, res) {
 })
 
 app.get('/userprofile', function (req, res) {
-  res.render('userProfile.ejs')
+	knex('userdetails').select('*').where('username','=',req.session.username)
+	.then(data => {
+		res.render('userProfile.ejs', {data : data})
+	})
+  
+})
+
+app.post('/saveDetails', function(req, res){
+	var obj = req.body;
+	if(obj.dob == '') obj.dob=null;
+	console.log(obj);
+	knex('userdetails').where('username', '=', obj.username).update({
+		'DOB' : obj.dob,
+		'Gender' : obj.gender,
+		'Address' : obj.address,
+		'About' : obj.about
+	})
+	.then(()=>{
+		res.redirect('/userprofile');
+	})
+	
 })
 
 app.get('/appliedJobs', function (req, res) {

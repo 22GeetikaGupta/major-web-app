@@ -175,59 +175,78 @@
 			</div>
 			
 			<div class="about pages">
+				<form method="post" action="/saveDetails"> 
 				<div class="savebutton">
-					<button>Save changes</button>
+					<button type="submit">Save changes</button>
 				</div>
 				<div class="details">
 					<div class="row">
-						<p>Personal ID : </p>
-						<input type=text placeholder="310498" readonly>
+						<p>Username : </p>
+						<input type=text name="username" value="<%=data[0].UserName%>" readonly>
 					</div>
 
 					<div class="row">
 						<p>Name : </p>
-						<input type=text placeholder="Geetika Gupta" readonly>
+						<input type=text value="<%=data[0].Name%>" readonly>
 					</div>
 
     				<div class="row">
 						<p>Email Id : </p>
-						<input type=text placeholder="22guptageetika@gmail.com" readonly>
+						<input type=text value="<%=data[0].email%>" readonly>
 					</div>
 
 					<div class="row">
 						<p>Phone No. : </p>
-						<input type=text placeholder="9876543210" readonly>
+						<input type=text value="<%=data[0]['Phone no']%>" readonly>
 					</div>
 
 					<div class="row">
 						<p>Date Of Birth : </p>
-						<input type=date placeholder="DD/MM/YYYY">
+						<input type=date name="dob" placeholder="DD/MM/YYYY" value=<%=data[0].DOB%>>
 					</div>
 
 					<div class="row">
 						<p>Address : </p>
-						<input type=text placeholder="City, State, Country">
+						<input type=text value="<%=data[0].Address%>" name="address">
 					</div>
 
 					<div class="row">
 						<p>Gender : </p>
 						<select name="gender" id="gender">
+						<%
+						
+						var options = [" ", "Male ", "Female "];
+						for ( var i = 0; i < options.length; i++ )
+						{
+							
+						    var selected = "";
+						    var val = data[0].Gender;
+						    if(val == options[i] ) {
+						    	selected = "selected";
+							}
+						    %>
+						    <option value="<%=options[ i ]%>" <%=selected %>><%=options[i] %></option><%
+						}
+						%>
+						</select>
+						<!-- </select>
+						<select name="gender" id="gender">
 							<option value=""></option>
 							<option value="male"> Male </option>
 							<option value="female"> Female </option>
-							<option value="none"> Pefer not to say </option>
-						</select>
+						</select> -->
 						
 					</div>
 
 					<div class="row">
 						<p>About : </p>
-						<textarea rows=15 placeholder="Write something about yourself..."></textarea>
+						<textarea rows=15 name="about" placeholder="Write something about yourself..."></textarea>
 						
 					</div>
 					
 
 				</div>
+			</form>
 				
 			</div>
 			<div class="academics pages">
