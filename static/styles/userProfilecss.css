@@ -326,7 +326,9 @@ body{
 	margin-bottom: 10px;
 	grid-template-columns: 30% 70%;
 }
-
+.skill{
+	top: 0;
+}
 .skill .row p{
 	margin-top: 0em;
 }
@@ -377,3 +379,6 @@ body{
 	display: none;
 }
 
+.invisible{
+	display: none;
+}

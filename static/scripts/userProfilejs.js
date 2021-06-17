@@ -1,5 +1,7 @@
 console.log("hey");
 
+
+
 function about(){
 	const pages = document.querySelectorAll('.pages');
 	const menu = document.querySelectorAll('.menu');
@@ -142,21 +144,40 @@ var dropmenu = (id) => {
 	}
 	
 }
-
+addprop(1);
+addprop(2);
+addprop(3);
+addprop(4);
+addprop(5);
+addprop(6);
 function addprop(id) {
 	var obj = document.getElementsByClassName('dropdown')[id-1].childNodes;
 
 	console.log(obj.length/2);
 	document.getElementsByClassName('input')[id-1].innerHTML = "";
 	for(var i=0; i<(obj.length/2)-1; i++){
-		console.log(i);
 		var obj2 = obj[2*i + 1].childNodes;
 		if(obj2[0].checked){
-			document.getElementsByClassName('input')[id-1].innerHTML += `<span style="background-color: #EAEFF1; padding-left: 5px; padding-right: 5px; margin-left: 5px; margin-bottom: 5px;"> ${obj2[1].data} </span>`;
+			document.getElementsByClassName('input')[id-1].innerHTML += `<span class="sk" style="background-color: #EAEFF1; padding-left: 5px; padding-right: 5px; margin-left: 5px; margin-bottom: 5px;"> ${obj2[1].data.trim()} </span>`;
 		}
 	}
+
+	var obj2 = document.getElementsByClassName('input')[id-1].childNodes;
+
+	var val = "";
+	for(var i=0; i<obj2.length; i++){
+		// if(i==obj2.length-1){
+		// 	val += (obj2[i].innerText);
+		// }
+		// else{
+			val += (obj2[i].innerText + ",");
+		// }
+		
+	}
+	document.getElementById(id).value = val;
 	
 }
+
 
 function addProject(){
 	document.getElementById('id03').style.display = "block";

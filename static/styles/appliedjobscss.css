@@ -3,6 +3,10 @@ body{
 	background-color: #F3FDFF;
 }
 
+.invisible{
+	display: none;
+}
+
 #sideNavBar {
 	margin-top: 150px;
   /*height: 100%;*/
@@ -110,8 +114,14 @@ body{
 	height: 100%;
 	display: block;
 }
-.application{
+form{
 	width: 37%;
+	display: inline-block;
+	margin: 20px;
+}
+
+.application{
+	width: 90%;
 	border: solid black;
 	box-shadow: 10px 15px #888888;
 	display: inline-block;

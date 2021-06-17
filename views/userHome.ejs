@@ -12,17 +12,20 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	<body>
+		
 		<div id="id01" class="modal">
   
 		  <form class="modal-content animate" action="/applyJob" method="post">
-		  	
+		  	<input type="text" name="company" class="invisible">
+		  	<input type="text" name="id" class="invisible">
+		  	<input type="text" name="role" class="invisible"> 
 		    <div class="container">
-		    	<h2>Company name</h2>
-		    	<p>This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.This is a company.</p>
-		    	<h4>Job Role : </h4><p>Software developer</p>
-		    	<h4>Location : </h4><p>Pune, Banglore</p>
+		    	<h2 class="nameD"></h2>
+		    	<p class="aboutD"></p>
+		    	<h4>Job Role : </h4><p class="roleD"></p>
+		    	<h4>Location : </h4><p class="placeD"></p>
 		    	<h4>Job requirements : </h4>
-		    	<p>C, C++, Java, pyhton, everything...</p> 
+		    	<p class="skillD"></p> 
 
 		    </div>
 
@@ -43,7 +46,7 @@
 		</div>
 		<div id="upper">
 				<div id="user">
-					<p id="name"><%=username%></p>
+					<p id="name"><%=data[0].UserName%></p>
 					<p id="id">USER ID : 310498</p>
 				</div>
 				<a href="/"><img src="/public/jobs.png"></a>
@@ -89,71 +92,49 @@
 				<button>Apply filters</button>
 			</div>
 			<div class="jobpost">
-				<div class="job">
-					<img src="/public/job2.png">
-					<div class="job-content">
-						<div class="left">
-							<h2>Software developer</h2>
-							<p>Company name</p>
-							<p>Location : Banglore</p>
-						</div>
-						<div class="right">
-							<p>Profile : IT service</p>
-							<p>Last date to apply : 15 Jan 2021</p>
-							<button onclick="viewJobDetails()">View details</button>
-						</div>
+				<%
+					
+					var arr = [];
+					var obj = {};
+					for(var i=0; i < jobs.length; i++){
+						arr.push(jobs[i]['Job Id']);
+					}
+					for(var i=0; i < company.length; i++){
+						obj[company[i]['UserName']] = company[i];
+					}
+		
+					for(var i=0; i < vacancy.length; i++){
+						if(!arr.includes(vacancy[i]['Job Id'])){%>
+							<div class="job">
+								<img src="/public/job2.png">
+								<div class="job-content">
+									<%
 
-					</div>
-				</div>
+										var user = vacancy[i].UserName;
+										var name1 = obj[user];
+										var name = name1['Company name'];
+										var a = name1['About'];
 
-				<div class="job">
-					<img src="/public/job2.png">
-					<div class="job-content">
-						<div class="left">
-							<h2>Software developer</h2>
-							<p>Company name</p>
-							<p>Location : Banglore</p>
-						</div>
-						<div class="right">
-							<p>Profile : IT service</p>
-							<p>Last date to apply : 15 Jan 2021</p>
-							<button>View details</button>
-						</div>
+										%>
+									<div class="left">
+										<h2><%=vacancy[i]['Role']%></h2>
+										
+										<p><%=name%></p>
+										<p>Location : <%=vacancy[i]['Place']%></p>
+									</div>
+									<div class="right">
+										<p>Profile : <%=vacancy[i]['Role']%></p>
+										<p>Last date to apply : <%=vacancy[i]['Date'].toDateString()%></p>
+										
+										<button onclick="viewJobDetails(name,name,vacancy[i])">View details</button>
+									</div>
 
-					</div>
-				</div>
-				<div class="job">
-					<img src="/public/job2.png">
-					<div class="job-content">
-						<div class="left">
-							<h2>Software developer</h2>
-							<p>Company name</p>
-							<p>Location : Banglore</p>
-						</div>
-						<div class="right">
-							<p>Profile : IT service</p>
-							<p>Last date to apply : 15 Jan 2021</p>
-							<button>View details</button>
-						</div>
+								</div>
+							</div>
 
-					</div>
-				</div>
-				<div class="job">
-					<img src="/public/job2.png">
-					<div class="job-content">
-						<div class="left">
-							<h2>Software developer</h2>
-							<p>Company name</p>
-							<p>Location : Banglore</p>
-						</div>
-						<div class="right">
-							<p>Profile : IT service</p>
-							<p>Last date to apply : 15 Jan 2021</p>
-							<button>View details</button>
-						</div>
+				<%}}%>
 
-					</div>
-				</div>
+
 			</div>
 		</div>
 		<script type="text/javascript" src = "/public/scripts/userHome.js"></script>

@@ -209,13 +209,72 @@ app.get('/login2', function (req, res) {
 app.get('/userhome', function (req, res) {
 	var username="";
 	if(req.session.username) username=req.session.username;
-  res.render('userHome.ejs', {username : username});
+	knex('userdetails').select('*').where('username','=',username)
+	.then(data => {
+		knex('company details').select('*')
+		.then(company => {
+			knex('vacancy').select('*')
+			.then(vacancy => {
+				knex('applied jobs').select('Job Id').where('username', '=', username)
+				.then(jobs => {
+					res.render('userHome.ejs', {data : data,
+												company : company,
+												vacancy : vacancy,
+												jobs : jobs
+												});
+				})
+			})
+		})
+		
+	})
+  
 })
 
 app.get('/userprofile', function (req, res) {
 	knex('userdetails').select('*').where('username','=',req.session.username)
 	.then(data => {
-		res.render('userProfile.ejs', {data : data})
+		knex('usereducation').select('*').where('username', '=', data[0].UserName)
+		.then(education => {
+			for(var i=0; i<education.length; i++){
+				education[i]['Institute name'] = education[i]['Institute name'].toUpperCase();
+				education[i].StartDate = education[i].StartDate.toDateString().slice(4);
+				education[i].EndDate = education[i].EndDate.toDateString().slice(4);
+			}
+
+			knex('userexperience').select('*').where('username', '=', data[0].UserName)
+			.then(experience => {
+				for(var i=0; i<experience.length; i++){
+					experience[i]['Company name'] = experience[i]['Company name'].toUpperCase();
+					experience[i].StartDate = experience[i].StartDate.toDateString().slice(4);
+					experience[i].EndDate = experience[i].EndDate.toDateString().slice(4);
+				}
+
+				knex('user skills').select('*').where('username', '=', data[0].UserName)
+				.then(skills => {
+
+					knex('user project').select('*').where('username', '=', data[0].UserName)
+					.then(projects => {
+						for(var i=0; i<projects.length; i++){
+							projects[i]['Title'] = projects[i]['Title'].toUpperCase();
+							projects[i]['Company Name'] = projects[i]['Company Name'].toUpperCase();
+							projects[i].StartDate = projects[i].StartDate.toDateString().slice(4);
+							projects[i].EndDate = projects[i].EndDate.toDateString().slice(4);
+						}
+						res.render('userProfile.ejs', {data : data,
+										   education : education,
+											experience : experience,
+											skills : skills,
+											projects : projects
+											})
+					})
+					
+				})
+				
+			})
+			
+			
+		})
+		
 	})
   
 })
@@ -236,9 +295,165 @@ app.post('/saveDetails', function(req, res){
 	
 })
 
+app.post('/saveEducation', function(req, res){
+	var obj = req.body;
+	knex('usereducation').select('id').where('username', '=', req.session.username)
+	.then(data => {
+		var n = data.length;
+		var identity = 1;
+		if(n!=0){
+			var last = data[n-1].id;
+			identity = last + 1;
+		}
+		
+		knex('usereducation').insert({
+			'UserName' : req.session.username,
+			'Institute name' : obj.Institute,
+			'Program' : obj.program,
+			'StartDate' : obj.Start,
+			'EndDate' : obj.End,
+			'Grade Scale' : obj.Scale,
+			'Grade Obtained' : obj.Grade,
+			'Major Sub I' : obj.major1,
+			'Major Sub II' : obj.major2,
+			'id' : identity
+		})
+		.then(()=>{
+			res.redirect('/userprofile');
+		})
+	})
+	
+})
+
+app.post('/deleteEducation', function(req, res){
+	knex('usereducation').where("username", "=", req.session.username).where("id", "=", req.body.id)
+	.del().then((count)=>{
+		console.log("No. of rows deleted : ", count);
+		res.redirect('/userprofile');
+	})
+})
+
+app.post('/saveExperience', function(req, res){
+	var obj = req.body;
+	
+	knex('userexperience').select('id').where('username', '=', req.session.username)
+	.then(data => {
+		var n = data.length;
+		var identity = 1;
+		if(n!=0){
+			var last = data[n-1].id;
+			identity = last + 1;
+		}
+		
+		knex('userexperience').insert({
+			'UserName' : req.session.username,
+			'Company name' : obj.Company,
+			'StartDate' : obj.Start1,
+			'EndDate' : obj.End1,
+			'Description' : obj.Description,
+			'id' : identity
+		})
+		.then(()=>{
+			res.redirect('/userprofile');
+		})
+	})
+})
+
+app.post('/deleteExperience', function(req, res){
+	knex('userexperience').where("username", "=", req.session.username).where("id", "=", req.body.id)
+	.del().then((count)=>{
+		console.log("No. of rows deleted : ", count);
+		res.redirect('/userprofile');
+	})
+})
+
+app.post('/saveSkills', function(req, res){
+	var obj = req.body;
+	knex('user skills').where("username","=",req.session.username)
+	.del().then(()=>{
+		var a = [];
+		for(var v in obj){
+			var arr = obj[v].split(',');
+			var user = req.session.username;
+			if(arr.length == 0) continue;
+			for(var i=0; i<arr.length-1; i++){
+				console.log("inside node js ", arr[i].trim(), arr[i].trim().length);
+				a.push({
+					username : user,
+					'Skills name' : arr[i].trim(),
+					'Skill Category' : v
+				})
+				
+			}
+		}
+
+		knex('user skills').insert(a)
+		.then(()=>{
+			res.redirect('/userprofile');
+		})
+		
+	})
+	
+})
+
+app.post('/saveProject', function(req, res){
+	var obj = req.body;
+	knex('user project').select('id').where('username', '=', req.session.username)
+	.then(data => {
+		var n = data.length;
+		var identity = 1;
+		if(n!=0){
+			var last = data[n-1].id;
+			identity = last + 1;
+		}
+		
+		knex('user project').insert({
+			'UserName' : req.session.username,
+			'Title' : obj.title,
+			'Company Name' : obj.guide,
+			'StartDate' : obj.Start2,
+			'EndDate' : obj.End2,
+			'Description' : obj.description,
+			'id' : identity
+		})
+		.then(()=>{
+			res.redirect('/userprofile');
+		})
+	})
+
+})
+
+app.post('/deleteProject', function(req, res){
+	knex('user project').where("username", "=", req.session.username).where("id", "=", req.body.id)
+	.del().then((count)=>{
+		console.log("No. of rows deleted : ", count);
+		res.redirect('/userprofile');
+	})
+})
+
 app.get('/appliedJobs', function (req, res) {
 	console.log("applied jobs");
-  res.render('appliedJobs.ejs')
+	knex('userdetails').select('*').where('username','=',req.session.username)
+	.then(data => {
+		knex('applied jobs').select('*').where('UserName', '=', req.session.username)
+		.then(jobs => {
+			console.log(req.session.username,jobs.length);
+			res.render('appliedJobs.ejs', {jobs : jobs,
+											data : data});
+		})
+	})
+  	
+})
+
+app.post('/withdraw', function(req, res){
+	var obj = req.body;
+	console.log(obj);
+
+	knex('applied jobs').update({'Status' : 'Withdrawn'}).where('username', '=', req.session.username)
+	.where('Job Id','=',obj.id)
+	.then(()=>{
+		res.redirect('/appliedJobs');
+	})
 })
  
 app.get('/companyHome', function (req, res) {

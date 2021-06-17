@@ -21,7 +21,7 @@
 		</div>
 		<div id="upper">
 				<div id="user">
-					<p id="name">GEETIKA GUPTA</p>
+					<p id="name"><%=data[0].UserName%></p>
 					<p id="id">USER ID : 310498</p>
 				</div>
 				<a href="/"><img src="/public/jobs.png"></a>
@@ -34,76 +34,27 @@
 				</div>
 			
 			<div class="applications">
-				<div class="application">
-					<h3 class="companyName">GOOGLE</h3>
-					<p class="role">Software Developer - II</p>
-					<p class="status">Status : Pending</p>
-					<p class="sent">Applied 10 days ago</p>
-					<button class="withdraw">Withdraw Appliation</button>
-				</div>
-				<div class="application">
-					<h3 class="companyName">GOOGLE</h3>
-					<p class="role">Software Developer - II</p>
-					<p class="status">Status : Pending</p>
-					<p class="sent">Applied 10 days ago</p>
-					<button class="withdraw">Withdraw Appliation</button>
-				</div>
-				<div class="application">
-					<h3 class="companyName">GOOGLE</h3>
-					<p class="role">Software Developer - II</p>
-					<p class="status">Status : Pending</p>
-					<p class="sent">Applied 10 days ago</p>
-					<button class="withdraw">Withdraw Appliation</button>
-				</div>
-				<div class="application">
-					<h3 class="companyName">GOOGLE</h3>
-					<p class="role">Software Developer - II</p>
-					<p class="status">Status : Pending</p>
-					<p class="sent">Applied 10 days ago</p>
-					<button class="withdraw">Withdraw Appliation</button>
-				</div>
-				<div class="application">
-					<h3 class="companyName">GOOGLE</h3>
-					<p class="role">Software Developer - II</p>
-					<p class="status">Status : Pending</p>
-					<p class="sent">Applied 10 days ago</p>
-					<button class="withdraw">Withdraw Appliation</button>
-				</div>
-				<div class="application">
-					<h3 class="companyName">GOOGLE</h3>
-					<p class="role">Software Developer - II</p>
-					<p class="status">Status : Pending</p>
-					<p class="sent">Applied 10 days ago</p>
-					<button class="withdraw">Withdraw Appliation</button>
-				</div>
-				<div class="application">
-					<h3 class="companyName">GOOGLE</h3>
-					<p class="role">Software Developer - II</p>
-					<p class="status">Status : Pending</p>
-					<p class="sent">Applied 10 days ago</p>
-					<button class="withdraw">Withdraw Appliation</button>
-				</div>
-				<div class="application">
-					<h3 class="companyName">GOOGLE</h3>
-					<p class="role">Software Developer - II</p>
-					<p class="status">Status : Pending</p>
-					<p class="sent">Applied 10 days ago</p>
-					<button class="withdraw">Withdraw Appliation</button>
-				</div>
-				<div class="application">
-					<h3 class="companyName">GOOGLE</h3>
-					<p class="role">Software Developer - II</p>
-					<p class="status">Status : Pending</p>
-					<p class="sent">Applied 10 days ago</p>
-					<button class="withdraw">Withdraw Appliation</button>
-				</div>
-				<div class="application">
-					<h3 class="companyName">GOOGLE</h3>
-					<p class="role">Software Developer - II</p>
-					<p class="status">Status : Pending</p>
-					<p class="sent">Applied 10 days ago</p>
-					<button class="withdraw">Withdraw Appliation</button>
-				</div>
+				<%if(jobs.length==0){%>
+				<p style="color: blue; margin-left: 50px;">YOU HAVE NOT APPLIED TO ANY JOB YET...</p>
+				<%}else{
+				for(var i=0; i < jobs.length; i++){%>
+				<form method='post' action='/withdraw'>
+					<div class="application">
+						<h3 class="companyName"><%=jobs[i]['Company name']%></h3>
+						<p class="role"><%=jobs[i].Role%></p>
+						<p class="status">Status : <%=jobs[i].Status%></p>
+						<p class="sent">Applied on : <%=jobs[i]['Application Date'].toDateString()%></p>
+
+						<input type="text" class="invisible" value="<%=jobs[i]['Job Id']%>" name="id">
+						<%if(jobs[i].Status == 'Withdrawn'){%>
+							<button class="withdraw" style="background-color: grey; cursor: default;">Application Withdrawn</button>
+						<%}else{%>
+						<button class="withdraw" type="submit">Withdraw Appliation</button>
+						<%}%>
+					</div>
+				</form>
+
+				<%}}%>
 			</div>
 		<!-- </div> -->
 		</div>
