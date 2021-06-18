@@ -215,7 +215,7 @@ app.get('/userhome', function (req, res) {
 		.then(company => {
 			knex('vacancy').select('*')
 			.then(vacancy => {
-				knex('applied jobs').select('Job Id').where('username', '=', username)
+				knex('applied jobs').select('*').where('username', '=', username)
 				.then(jobs => {
 					res.render('userHome.ejs', {data : data,
 												company : company,
@@ -452,8 +452,65 @@ app.post('/withdraw', function(req, res){
 	knex('applied jobs').update({'Status' : 'Withdrawn'}).where('username', '=', req.session.username)
 	.where('Job Id','=',obj.id)
 	.then(()=>{
-		res.redirect('/appliedJobs');
+		knex('vacancy').select('No of Applicants').where('Job Id', '=', obj.id)
+		.then(no => {
+			knex('vacancy').update({'No of Applicants' : no[0]['No of Applicants']-1}).where('Job Id', '=', obj.id)
+			.then(()=>{
+				res.redirect('/appliedJobs');
+			})
+		})
+		
 	})
+})
+
+app.post('/applyJob', function(req, res){
+	var obj = req.body;
+	knex('applied jobs').select('*').where('UserName','=',req.session.username).where('Job Id', '=', obj.id)
+	.then(data => {
+		if(data.length==0){
+			knex('applied jobs').insert({
+				UserName : req.session.username,
+				'Company name' : obj.companyname,
+				Role : obj.role,
+				'Application Date' : new Date(),
+				'Status' : 'Pending',
+				'Job Id' : obj.id
+			})
+			.then(()=>{
+				knex('vacancy').select('No of Applicants').where('Job Id', '=', obj.id)
+				.then(no => {
+					knex('vacancy').update({'No of Applicants' : no[0]['No of Applicants']+1}).where('Job Id', '=', obj.id)
+					.then(()=>{
+						knex('applicants').insert({
+							'Job Id' : obj.id,
+							'Company name' : obj.company,
+							'Username' : req.session.username
+						})
+						.then(()=>{
+							res.redirect('/userHome');
+						})
+					})
+				})
+				
+			})
+		}
+		else{
+			knex('applied jobs').update({'Status' : 'Pending'}).where('UserName','=',req.session.username)
+			.where('Job Id','=',obj.id)
+			.then(()=>{
+				knex('vacancy').select('No of Applicants').where('Job Id', '=', obj.id)
+				.then(no => {
+					knex('vacancy').update({'No of Applicants' : no[0]['No of Applicants']+1}).where('Job Id', '=', obj.id)
+					.then(()=>{
+						res.redirect('/userHome');
+					})
+				})
+				
+			})
+		}
+	})
+				
+			
 })
  
 app.get('/companyHome', function (req, res) {

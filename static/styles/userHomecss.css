@@ -228,3 +228,7 @@ label{
   from {transform: scale(0)} 
   to {transform: scale(1)}
 }
+
+.invisible{
+	display: none;
+}

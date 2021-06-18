@@ -16,9 +16,10 @@
 		<div id="id01" class="modal">
   
 		  <form class="modal-content animate" action="/applyJob" method="post">
-		  	<input type="text" name="company" class="invisible">
-		  	<input type="text" name="id" class="invisible">
-		  	<input type="text" name="role" class="invisible"> 
+		  	<input type="text" name="company" class="invisible company">
+		  	<input type="text" name="companyname" class="invisible companyname">
+		  	<input type="text" name="id" class="invisible id">
+		  	<input type="text" name="role" class="invisible role"> 
 		    <div class="container">
 		    	<h2 class="nameD"></h2>
 		    	<p class="aboutD"></p>
@@ -96,8 +97,13 @@
 					
 					var arr = [];
 					var obj = {};
+					console.log("job of size", jobs.length);
 					for(var i=0; i < jobs.length; i++){
-						arr.push(jobs[i]['Job Id']);
+						console.log(jobs[i]);
+						if(jobs[i]['Status']=='Pending'){
+							arr.push(jobs[i]['Job Id']);
+							console.log("pushed", jobs[i]['Job Id']);
+						}
 					}
 					for(var i=0; i < company.length; i++){
 						obj[company[i]['UserName']] = company[i];
@@ -125,8 +131,11 @@
 									<div class="right">
 										<p>Profile : <%=vacancy[i]['Role']%></p>
 										<p>Last date to apply : <%=vacancy[i]['Date'].toDateString()%></p>
-										
-										<button onclick="viewJobDetails(name,name,vacancy[i])">View details</button>
+										<%var role = vacancy[i]['Role']
+										var req = vacancy[i]['Requirements']
+										var id = vacancy[i]['Job Id']
+										var place = vacancy[i]['Place']%>
+										<button onclick="viewJobDetails('<%=user%>', '<%=name%>', '<%=a%>', '<%=role%>', '<%=req%>', '<%=id%>', '<%=place%>')">View details</button>
 									</div>
 
 								</div>

@@ -47,7 +47,7 @@ function skills(){
 	document.getElementsByClassName('skillmenu')[0].style.backgroundColor = 'white';
 }
 
-function achievements(){
+function resume(){
 	const pages = document.querySelectorAll('.pages');
 	const menu = document.querySelectorAll('.menu');
 	pages.forEach((item, index)=>{
@@ -57,9 +57,9 @@ function achievements(){
 		item.style.borderBottom = '1px solid grey';
 		item.style.backgroundColor = '#E9EBEC';
 	})
-	document.getElementsByClassName('achievements')[0].style.display = 'block';
-	document.getElementsByClassName('achievementmenu')[0].style.borderBottom = 'none';
-	document.getElementsByClassName('achievementmenu')[0].style.backgroundColor = 'white';
+	document.getElementsByClassName('resume')[0].style.display = 'block';
+	document.getElementsByClassName('resumemenu')[0].style.borderBottom = 'none';
+	document.getElementsByClassName('resumemenu')[0].style.backgroundColor = 'white';
 }
 
 function addEducation(){
