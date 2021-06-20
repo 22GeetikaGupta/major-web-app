@@ -65,23 +65,33 @@ body{
 	font-family: 'Alata', sans-serif;
 }
 #upper #user{
-	padding: 10px;
+	/*padding: 10px;*/
 	padding-right: 20px;
 	margin-right: 20px;
 	float: right;
 	width: 30%;
+	display: grid;
+	grid-template-columns: 50% 50%;
 	/*border: 2px solid;*/
 	background-color: #CDDEE2;
 }
 
 #user #name{
-	float: left;
-	padding-left: 10px;
+	padding: 10px;
+	text-align: left;
 }
 
 #user #id{
-	float: right;
+	padding: 10px;
+	text-align: center;
+	background-color: rgb(254, 46, 61);
+	cursor: pointer;
 }
+
+#id a{
+	text-decoration: none;
+}
+
 
 #upper img{
 	padding-left: 20px;

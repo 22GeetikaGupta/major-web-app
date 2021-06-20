@@ -1,0 +1,91 @@
+<html>
+	<head>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="/public/styles/salary.css">
+	  <link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300&display=swap" rel="stylesheet">
+		  <link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+
+	</head>
+	<body>
+		<div class="form">
+			<h3>Fill this form to know your worth!!</h3>
+			<form class="card-form" method="post" action="/predict">
+				<div class="input">
+					<input type="text" name="user" placeholder="Full Name">
+				</div>
+				<div class="input">
+					<input type="number" min=0 max=1 step=1 name="onsite" placeholder="Type 1 if you have worked onsite else type 0" required>
+				</div>
+				<div class="input">
+					<input type="text" name="company" placeholder="Previous company name (if you are not a fresher)">
+				</div>
+				<div class="input">
+					<input type="number" min=0 max=5 step=0.1 name="rating" placeholder="Glassdoor rating of Previous company (select 0 if not applicable)" required>
+				</div>
+				<div class="input">
+					<input type="text" name="role" placeholder="Role in Previous Company" required>
+				</div>
+				<div class="input">
+					<input type="number" name="salary" placeholder="Salary in Previous company (select 0 if not applicable)" required>
+				</div>
+				<div class="input">
+					<input type="number" min=0 max=60 step=1 name="experience" placeholder="Years of experience (Enter 0 if you are a fresher)" required>
+				</div>
+				<div class="input">
+					<select name="gender">
+						<option value="female">Female</option>
+						<option value="male">Male</option>
+					</select>
+				</div>
+
+				<%var arr = ["UIPATH", "REACT.JS" ,"JEE" ,"ML" ,"SQL" , "CLOUD SERVICES" , "NETWORKING", "DEEP LEARNING", "KOTLIN", "DEVOPS", "NODE.JS", "SONICWALL" , "SPRINGBOOT" , "TESTING" , "CSS" ,"JAVASCRIPT", ".NET" , "SWIFT" ,"DOCKER", "HTML" , "SHAREPOINT", "VUE.JS", "PHP" , "IOS" ,"RECRUITING" ,"HEADHUNTING" , "AGILE" ,"C" ,"LINUX" , "FORTIGATE" , "OBJECT ORIENTED DESIGN" , "WEB DEVELOPMENT" , "UX" , "JAVA" , "FLUTTER" , "COMPUTER HARDWARE" ,"HIBERNATE" , "SALESFORCE" , "GROOVY" , "VMWARE" , "BLUEPRISM" , "REST API" , "REDIS" , "ORACLE FINANCE CLOUD" , "HADOOP" , "CMS" , "JSON" , "UNIX" , "PYTHON" , "WINDOWS" , "CYBERSECURITY" , "BIT BUCKET" , "SPRING" , "C++" , "MVC" , "API INTEGRATION" , "SYSTEM ADMINISTRATION" , "JQUERY" , "REACT NATIVE" , "ANGULAR" , "KAFKA" , "MYSQL" ,"JAVASCRIPT" , "ORACLE ERP FINANCE" ,"ASP.NET" , "MICROSERVICES" , "MONGODB" , "ORACLE DBA" , "CONFIGURING" , "PL/SQL" , "ANDROID" , "AWS" , "ORACLE"];%>
+
+				<div class="input">
+					<p>Major Skill 1 : </p>
+					<select name="skill1">
+
+						<%for(var i=0; i < arr.length; i++){%>
+							<option value="<%=arr[i]%>"><%=arr[i]%></option>
+						<%}%>
+					</select>
+				</div>
+
+				<div class="input">
+					<p>Major Skill 2 : </p>
+					<select name="skill2">
+						<option value=""></option>
+						<%for(var i=0; i < arr.length; i++){%>
+							<option value="<%=arr[i]%>"><%=arr[i]%></option>
+						<%}%>
+					</select>
+				</div>
+
+				<div class="input">
+					<p>Major Skill 3 : </p>
+					<select name="skill3">
+						<option value=""></option>
+						<%for(var i=0; i < arr.length; i++){%>
+							<option value="<%=arr[i]%>"><%=arr[i]%></option>
+						<%}%>
+					</select>
+				</div>
+				<div class="submit">
+					<input type="submit" value="Submit">
+				</div>
+			</form>
+		</div>
+		<div class="sal">
+			<div class="salary">
+				<h3>Expected Salary Per Annum: </h3>
+				<p><%=salary%></p>
+			</div>
+		</div>
+	</body>
+</html>

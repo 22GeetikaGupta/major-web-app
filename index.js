@@ -5,6 +5,7 @@ var knex = require('knex');
 var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt');
+const {spawn} = require('child_process');  
 
 
 knex = knex({
@@ -513,6 +514,51 @@ app.post('/applyJob', function(req, res){
 			
 })
  
+app.get('/salaryPredictor', function(req, res){
+	res.render('salaryPrediction.ejs', {salary : ''});
+})
+
+app.post('/predict', function(req, res){
+	var obj = req.body;
+	console.log(obj);
+	if(obj.experience > 0){
+		knex('prediction').insert({
+			Username : obj.user,
+			Onsite : obj.onsite,
+			'Glassdoor Rating' : obj.rating,
+			'Gender' : obj.gender,
+			'Previous company name' : obj.company,
+			'Year of Experience' : obj.experience,
+			'Salary' : obj.salary,
+			'Skill1' : obj.skill1,
+			'Skill2' : obj.skill2,
+			'Skill3' : obj.skill3,
+			'Role' : obj.role
+		})
+		.then(()=>{
+			var process = spawn('python',["./pythontool.py"] );
+
+			process.stdout.on('data', function(data) {
+		        var salary = data.toString();
+		        res.render('salaryPrediction.ejs', {salary : salary});
+		    } )
+		})
+	}
+	else{
+		var process = spawn('python',["./pythontool.py"] );
+
+		process.stdout.on('data', function(data) {
+	        var salary = data.toString();
+	        res.render('salaryPrediction.ejs', {salary : salary});
+	    } )
+	}
+
+
+
+
+
+})
+
 app.get('/companyHome', function (req, res) {
   res.render('HomeCompany.ejs', {company : req.session.username})
 })
