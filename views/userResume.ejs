@@ -1,0 +1,177 @@
+<html>
+	<head>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="/public/styles/userresume.css">
+	  <link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@300&display=swap" rel="stylesheet">
+		  <link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+
+	</head>
+	<body>
+		<div class="container">
+			
+		
+			<div class="resume pages">
+				
+				<div class="resumeContent">
+					<h1 class="name"><%=data[0].Name%></h1>
+					<%if(data[0].About != ''){%><p class="about italic"><%=data[0].About%></p><%}%>
+					<div class="section right_section">
+						<h3 >Personal details : </h3>
+						<div>
+							
+								<p><%=data[0].Address%></p>
+								<%if(data[0].DOB != null){%><p>Date of Birth : <%=data[0].DOB.toDateString().slice(4)%></p><%}%>
+								<%if(data[0].Gender != ''){%><p>Gender : <%=data[0].Gender%></p><%}%>
+							
+							
+								<p>Phone no. : <%=data[0]['Phone no']%></p>
+								<p>Email : <%=data[0].email%></p>
+							
+						</div>
+					</div>
+					<div class="section">
+						<%if( education.length != 0 ) { %>
+						<h3 class="head">Education : </h3>
+						<%for ( var i = 0; i < education.length; i++ ){
+							var identity = "edu"+(i+1);%>
+						<div class="educate">
+							<p><b><%=education[i]['Institute name']%></b> </p>
+							<i> ( <%=education[i].StartDate%> to <%=education[i].EndDate%> ) </i> 
+							<p> <%=education[i].Program%></p>
+							<p>Grade : <%=education[i]['Grade obtained']%> <%=education[i]['Grade Scale']%></p> 
+							<p>Major Subject I - <%=education[i]['Major Sub I']%></p>
+							<%if(education[i]['Major Sub II'] != ''){%>
+							<p>Major Subject II - <%=education[i]['Major Sub II']%></p>
+							<%}%>
+
+						</div>
+						<%}}%>
+					</div>
+					<div class="section">
+						<%if( experience.length != 0 ) { %>
+						<h3 class="head">Work Experience : </h3>
+						<%for ( var i = 0; i < experience.length; i++ ){
+							var identity = "exp"+(i+1);%>
+							
+							<div class="exp" id="<%=identity%>">
+								<input type="text" class="invisible" value="<%=experience[i].id%>" name="id">
+								
+								<p><b><%=experience[i]['Company name']%></b></p>
+								<p><i><%=experience[i]['StartDate']%> to <%=experience[i]['EndDate']%></i></p>
+								<p><%=experience[i]['Description']%></p>
+							</div>
+						
+						<%}}%>
+					</div>
+					<div class="section">
+						<%if(skills.length != 0){%>
+						<h3 class="head">Skills : </h3>
+						<%var pro =[];
+						var db = [];
+						var software = [];
+						var os = [];
+						var certi = [];
+						var other = [];
+						for(var i=0; i < skills.length; i++){
+							if(skills[i]['Skill Category']=='programming'){
+								pro.push(skills[i]['Skills name']);
+							}
+							else if(skills[i]['Skill Category']=='Database'){
+								db.push(skills[i]['Skills name']);
+							}
+							else if(skills[i]['Skill Category']=='OS'){
+								os.push(skills[i]['Skills name']);
+							}
+							else if(skills[i]['Skill Category']=='certifications'){
+								certi.push(skills[i]['Skills name']);
+							}
+							else if(skills[i]['Skill Category']=='softwares'){
+								software.push(skills[i]['Skills name']);
+							}
+							else{
+								other.push(skills[i]['Skills name']);
+							}
+						}
+
+						if(pro.length != 0){%>
+							<p><b>Programming languages : </b>
+							<%for(var i=0; i < pro.length; i++){%>
+								<%=pro[i]%>
+							<%}%>
+							</p>
+						<%}
+						%>
+
+						<%if(db.length != 0){%>
+							<p><b>Databases : </b>
+							<%for(var i=0; i < db.length; i++){%>
+								<%=db[i]%>
+							<%}%>
+							</p>
+						<%}
+						%>
+
+						<%if(os.length != 0){%>
+							<p><b>Operating Systems : </b>
+							<%for(var i=0; i < os.length; i++){%>
+								<%=os[i]%>
+							<%}%>
+							</p>
+						<%}
+						%>
+
+						<%if(software.length != 0){%>
+							<p><b>Softwares : </b>
+							<%for(var i=0; i < software.length; i++){%>
+								<%=software[i]%>
+							<%}%>
+							</p>
+						<%}
+						%>
+
+						<%if(certi.length != 0){%>
+							<p><b>Certifications : </b>
+							<%for(var i=0; i < certi.length; i++){%>
+								<%=certi[i]%>
+							<%}%>
+							</p>
+						<%}
+						%>
+
+						<%if(other.length != 0){%>
+							<p><b>Others : </b>
+							<%for(var i=0; i < other.length; i++){%>
+								<%=other[i]%>
+							<%}%>
+							</p>
+						<%}}
+						%>
+					</div>
+
+					<div class="section">
+						<%if(projects.length != 0){%>
+						<h3 class="head">Projects</h3>
+						<%for ( var i = 0; i < projects.length; i++ ){%>
+							<div class="project">
+								<p><b><%=projects[i].Title%></b><i> (<%=projects[i].StartDate%> to <%=projects[i].EndDate%>) </i></p>
+								<p><%=projects[i]['Company Name']%></p>
+								<p><%=projects[i].Description%></p>
+							</div>
+							
+						<%}}%>
+					</div>
+			</div>
+		</div>
+		
+
+		
+		<script type="text/javascript" src = "/public/scripts/userProfilejs.js"></script>
+	</body>
+</html>

@@ -1,10 +1,10 @@
 * {
-    background-color: #e4dcdc;
+    background-color: rgb(250, 250, 250);
     margin: 0;
 }
 .row{
     position: absolute;
-    margin-top: 80px;
+    top: 80px;
 }
 
 .vnavbar {
@@ -21,9 +21,13 @@
 }
 
 .cards {
-    width: 100%;
+
+   margin-top: 150px;
+    margin-left: 300px;
+    margin-right: 100px;
     height: 100%;
-    display: block;
+    display: grid;
+    grid-template-columns: auto auto;
 }
 
 .card {
@@ -36,7 +40,7 @@
     border-radius: 5px;
     /* background-color: #F0F0F0; */
     background-color: white;
-    width: 30%;
+    
     height: 150px;
     font-size: 20px;
     border-left: 1px solid #D3D3D3;
@@ -116,16 +120,12 @@ button:active {
     color: hsl(195, 84%, 44%);
 }
 
-.editvacancy {
-    float: right;
-    padding: 5px;
-}
 
 button {
     font-size: 15px;
-    background-color: transparent;
-    border: lightgrey;
-    border-color: #F0F0F0;
+    
+    
+    
 }
 
 #logo img {
@@ -136,13 +136,14 @@ button {
 }
 
 #header {
+    top:0px;
     width: 100%;
     height: 80px;
     background-color: white;
     padding-right: 10px;
     position: fixed;
     z-index: 10;
-    background-color: white;
+    box-shadow: 2px 3px 15px rgb(50, 50, 50);
 }
 
 #header .company{
@@ -184,6 +185,13 @@ li a:hover {
 
 /* Edit details form styling */
 
+form{
+    display: inline;
+}
+
+.viewapplicants{
+    float:right;
+}
 #modal {
     display: none;
     position: fixed;

@@ -5,6 +5,7 @@ var knex = require('knex');
 var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt');
+var company_router = require('./index_company')
 const {spawn} = require('child_process');  
 
 
@@ -32,7 +33,7 @@ app.use('/public', express.static(path.join(__dirname,'static')));
 
 
 app.set('view engine', 'ejs');
-
+app.use('/companyHome', company_router);
 function redirecthome(req, res, next)
 {
 	if(req.session.username)

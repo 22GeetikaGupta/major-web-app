@@ -15,82 +15,53 @@
         <!-- Header -->
         <div id="header">
             <a id="logo" href="/"><img src="/public/jobs.png"></a>
-            <p class="company"><%=company%></p>
+            
         </div>
 
+        
 
         <div class="row">
             <!-- Vertical Navbar -->
             <div class="column navbar">
                 <ul>
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">New Job</a></li>
+                    <li><a href="/companyHome/newjob">New Job</a></li>
                     <li><a href="#">About Us</a></li>
                     <li><a href="/logout">Logout</a></li>
                 </ul>
             </div>
+        </div>
             <!-- Jobs Card -->
-            <div class="cards">
-                <div class="card">
-                    <div class="cardheader">
-                        <span class="job">Social Media Marketing</span>
-                        <span class="location">Mumbai</span>
-                    </div>
-                    <div class="cardbody">
-                        <span class="opendate">Vacancy Created On: <span>1/1/2021</span> </span>
-                        <span class="applicants">No of applicants: <span> 20</span></span>
-                    </div>
-                    <div class="cardfooter">
-                        <span class="closevacancy"><button>Close vacancy</button></span>
-                        <span class="editvacancy" id="editbtn"><button type="button" onclick=open1()>Edit details:</button></span>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="cardheader">
-                        <span class="job">Social Media Marketing</span>
-                        <span class="location">Mumbai</span>
-                    </div>
-                    <div class="cardbody">
-                        <span class="opendate">Vacancy Created On: <span>1/1/2021</span> </span>
-                        <span class="applicants">No of applicants: <span> 20</span></span>
-                    </div>
-                    <div class="cardfooter">
-                        <span class="closevacancy"><button>Close vacancy</button></span>
-                        <span class="editvacancy" id="editbtn"><button type="button" onclick=open1()>Edit details:</button></span>
-                    </div>
-                </div>
+        <div class="cards">
 
-
-                <div class="card">
+            <% for(let job of data){%>
+                <div class="card" >
                     <div class="cardheader">
-                        <span class="job">Social Media Marketing</span>
-                        <span class="location">Mumbai</span>
+                        <span class="job"><%=job.Role%></span>
+                        <span class="location"><%=job.Place%></span>
                     </div>
                     <div class="cardbody">
-                        <span class="opendate">Vacancy Created On: <span>1/1/2021</span> </span>
-                        <span class="applicants">No of applicants: <span> 20</span></span>
+                        <span class="opendate">Vacancy Created On: <span><%=job.Date.getDay()+1%>-<%=job.Date.getMonth()+1%>-<%=job.Date.getFullYear()%></span> </span>
+                        <span class="applicants">No of applicants: <span> <%=job["No of Applicants"]%></span></span>
                     </div>
                     <div class="cardfooter">
-                        <span class="closevacancy"><button>Close vacancy</button></span>
-                        <span class="editvacancy" id="editbtn"><button type="button" onclick=open1()>Edit details:</button></span>
+                        <form action = "/companyHome/closevacancy" method = "post">
+                            <span class="closevacancy">
+                                <input type = "text" name = "jobid" value = "<%=job['Job Id']%>" style = "display: none;">
+                                <input type = "submit" value = "Close Vacancy">
+                            </span>
+                        </form>
+                        
+                        <span class="viewapplicants" >
+                        <form action = "/companyHome/viewapplicants" method = "post">
+                            <input type = "text" name = "jobid" value = "<%=job['Job Id']%>" style = "display: none;">
+                            <input type="submit" value="View applicants">
+                        </form>
+                        </span>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="cardheader">
-                        <span class="job">Social Media Marketing</span>
-                        <span class="location">Mumbai</span>
-                    </div>
-                    <div class="cardbody">
-                        <span class="opendate">Vacancy Created On: <span>1/1/2021</span> </span>
-                        <span class="applicants">No of applicants: <span> 20</span></span>
-                    </div>
-                    <div class="cardfooter">
-                        <span class="closevacancy"><button>Close vacancy</button></span>
-                        <span class="editvacancy" id="editbtn"><button  type="button" onclick=open1()>Edit details:</button></span>
-                    </div>
-                </div>
-            </div>
+            <%}%>
+        </div>
 
             <div id="modal">
                 <form id="modal-content">
@@ -116,8 +87,8 @@
                 </form>
             </div>
 
-        </div>
+        
     </div>
 </body>
-
+<script src = "/public/scripts/HomeCompanyScript.js"></script>
 </html>

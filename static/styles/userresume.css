@@ -1,0 +1,17 @@
+/*common properties*/
+
+.italic{
+	font-style: italic;
+}
+
+
+/* specific properties */
+body{
+	background-color: ghostwhite;
+}
+.container{
+	background-color: white;
+	padding: 20px;
+	margin: auto;
+	width: 70%;
+}
