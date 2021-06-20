@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/22GeetikaGupta/major-web-app/issues"
   },
-  "homepage": "https://github.com/22GeetikaGupta/major-web-app#index",
+  "homepage": "https://github.com/22GeetikaGupta/major-web-app#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "cookie-session": "^1.4.0",
