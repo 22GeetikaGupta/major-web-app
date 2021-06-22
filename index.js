@@ -172,6 +172,10 @@ app.post("/register", function (req, res){
 							type: obj.option
 						})
 						.then(()=>{
+
+
+
+
 							knex("userdetails").insert({
 								username : obj.username,
 								name : obj.companyname,
@@ -179,6 +183,30 @@ app.post("/register", function (req, res){
 								'Phone no': obj.phone,
 								Address : obj.address
 							}).then(()=>{
+
+								if(obj.option == 'company')
+								{
+									knex('company details').insert({
+										UserName: obj.username,
+										'Company name': obj.companyname,
+										'Established Date': '1970-01-01',
+										'No of Employee': 0
+									}).then(()=>{
+										res.render('Loginform.ejs', {message:"", 
+														alertMsg: "User Registered Successfully. Now user may login",
+														email1 : "",
+					  									 comp1 : "",
+					  									 address2 : "",
+					  									 phone2 : "",
+					  									 name2 : ""
+													});
+									}).catch(err=>{
+										res.send("check you terminal for errors!!");
+										console.log(err);
+									});
+								}
+								else{
+
 								res.render('Loginform.ejs', {message:"", 
 														alertMsg: "User Registered Successfully. Now user may login",
 														email1 : "",
@@ -187,6 +215,9 @@ app.post("/register", function (req, res){
 					  									 phone2 : "",
 					  									 name2 : ""
 													});
+								}
+
+
 							})
 							
 						})
