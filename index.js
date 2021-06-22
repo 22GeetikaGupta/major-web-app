@@ -537,7 +537,7 @@ app.post('/predict', function(req, res){
 			'Role' : obj.role
 		})
 		.then(()=>{
-			var process = spawn('python',["./pythontool.py"] );
+			var process = spawn('python',["./pythontool.py", obj.onsite, obj.rating, obj.gender, obj.experience, obj.skill1, obj.skill2, obj.skill3] );
 
 			process.stdout.on('data', function(data) {
 		        var salary = data.toString();
@@ -546,7 +546,7 @@ app.post('/predict', function(req, res){
 		})
 	}
 	else{
-		var process = spawn('python',["./pythontool.py"] );
+		var process = spawn('python',["./pythontool.py", obj.onsite, obj.rating, obj.gender, obj.experience, obj.skill1, obj.skill2, obj.skill3] );
 
 		process.stdout.on('data', function(data) {
 	        var salary = data.toString();
