@@ -115,12 +115,10 @@
 								<img src="/public/job2.png">
 								<div class="job-content">
 									<%
-
 										var user = vacancy[i].UserName;
 										var name1 = obj[user];
 										var name = name1['Company name'];
-										var a = name1['About'];
-
+										var a = name1['About'].trim();
 										%>
 									<div class="left">
 										<h2><%=vacancy[i]['Role']%></h2>
@@ -130,11 +128,12 @@
 									</div>
 									<div class="right">
 										<p>Profile : <%=vacancy[i]['Role']%></p>
-										<p>Last date to apply : <%=vacancy[i]['Date'].toDateString()%></p>
+										<p>Job Posted on : <%=vacancy[i]['Date'].toDateString()%></p>
 										<%var role = vacancy[i]['Role']
 										var req = vacancy[i]['Requirements']
 										var id = vacancy[i]['Job Id']
 										var place = vacancy[i]['Place']%>
+
 										<button onclick="viewJobDetails('<%=user%>', '<%=name%>', '<%=a%>', '<%=role%>', '<%=req%>', '<%=id%>', '<%=place%>')">View details</button>
 									</div>
 

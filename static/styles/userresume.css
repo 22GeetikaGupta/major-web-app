@@ -15,3 +15,7 @@ body{
 	margin: auto;
 	width: 70%;
 }
+
+.invisible{
+	display: none;
+}
