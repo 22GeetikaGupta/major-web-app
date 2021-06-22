@@ -172,14 +172,41 @@ app.post("/register", function (req, res){
 							type: obj.option
 						})
 						.then(()=>{
-							knex("userdetails").insert({
-								username : obj.username,
-								name : obj.companyname,
-								email : obj.email,
-								'Phone no': obj.phone,
-								Address : obj.address
-							}).then(()=>{
-								res.render('Loginform.ejs', {message:"", 
+							if(obj.option == 'company')
+							{
+								knex('company details').insert({
+									UserName: obj.username,
+									'Company name': obj.companyname,
+									'Established Date': '1970-01-01',
+									'No of Employee': 0,
+									'email': obj.email,
+									'phoneno': obj.phone,
+									address: obj.address
+								}).then(()=>{
+									res.render('Loginform.ejs', {message:"", 
+													alertMsg: "User Registered Successfully. Now user may login",
+													email1 : "",
+				  									 comp1 : "",
+				  									 address2 : "",
+				  									 phone2 : "",
+				  									 name2 : ""
+												});
+								}).catch(err=>{
+									res.send("check you terminal for errors!!");
+									console.log(err);
+								});
+							}
+							else{
+
+								knex("userdetails").insert({
+									username : obj.username,
+									name : obj.companyname,
+									email : obj.email,
+									'Phone no': obj.phone,
+									Address : obj.address
+								}).then(()=>{
+
+									res.render('Loginform.ejs', {message:"", 
 														alertMsg: "User Registered Successfully. Now user may login",
 														email1 : "",
 					  									 comp1 : "",
@@ -187,7 +214,14 @@ app.post("/register", function (req, res){
 					  									 phone2 : "",
 					  									 name2 : ""
 													});
-							})
+									}).catch(err=>{
+										res.send("check you terminal for errors!!");
+										console.log(err);
+									});
+							}
+
+
+
 							
 						})
 						.catch(err=>{
