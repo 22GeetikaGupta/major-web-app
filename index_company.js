@@ -1,7 +1,9 @@
 var express = require('express');
 var knex = require('knex');
 var router = express.Router();
-
+var bodyParser = require('body-parser');
+var file = require('fs');
+router.use(bodyParser.urlencoded({extended: true}));
 
 
 knex = knex({
@@ -48,7 +50,7 @@ router.post('/viewapplicants', isLoggedIn, (req, res)=>{
     console.log(req.body);
     knex('applicants').select('username').where('Job Id', req.body.jobid)
     .then(data=>{
-        let queryar = [];
+        let queryar = ["none"];
         for(let user of data)
         {
             queryar.push(user.username);
@@ -66,7 +68,8 @@ router.post('/viewapplicants', isLoggedIn, (req, res)=>{
 
             res.render('viewt', {userdict});
             
-        });
+        })
+        .catch(console.log);
     })
 });
 
@@ -122,7 +125,79 @@ router.get('/resume', isLoggedIn, (req, res)=>{
 })
 
 router.get('/newjob', isLoggedIn, (req, res)=>{
-    res.render('newJob');
+    res.render('newJob', {message: ""});
+})
+
+router.post('/newjob', isLoggedIn, (req, res)=>{
+    for(let key in req.body)
+    {
+        if(req.body[key] == "")
+        {
+            res.render('newJob', {message: "Please fill all the details"});
+        }
+    }
+
+    file.readFile('./jobid.txt', 'utf-8', function(err, data){
+        if(err)
+        {
+            res.render('newJob', {message: "Error creating new job"});
+        }else{
+            jobid = data.toString();
+            file.writeFile('./jobid.txt', parseInt(data)+1, function(err){
+                if(err)
+                {
+                     res.render('newJob', {message: "Error creating new job"});
+
+                }
+                else{
+                    knex('vacancy').insert({
+                        UserName: req.session.username,
+                        Role: req.body.role,
+                        Place: req.body.place,
+                        Date: new Date(), 
+                        "No of Applicants": 0,
+                        "Job Id": jobid,
+                        Requirements: req.body.requirements
+                    })
+                    .then(data=>{
+                        res.render('newJob', {message: "Job added"});
+                    })
+                    .catch(console.log);
+
+                }
+            })
+        }
+    })
+});
+
+router.get('/aboutus', isLoggedIn, (req, res)=>{
+    knex('company details').where('UserName', req.session.username)
+    .then(data=>{
+        let actualdate = data[0]['Established Date'];
+        data[0]['Established Date'] =  actualdate.getFullYear() + "-";
+        data[0]['Established Date'] += actualdate.getMonth()<9 ? "0" + (actualdate.getMonth()+1): actualdate.getMonth()+1;
+        data[0]['Established Date'] += "-" ;
+        data[0]['Established Date'] += actualdate.getDay()<9?"0"+(actualdate.getDay()+1): actualdate.getDay()+1;
+        
+        
+        console.log( data[0]['Established Date']);
+        res.render('aboutus', {data: data[0]});
+    })
+    
+});
+
+router.post('/aboutus', isLoggedIn, (req, res)=>{
+    knex('company details').where('UserName', req.session.username).update ({
+        UserName: req.session.username,
+        about: req.body.about,
+        "Company name": req.body.companyname,
+        "Established Date": req.body.estdate,
+        "No of Employee": req.body.empcount
+    })
+    .then(data=>{
+        res.redirect('/companyHome/aboutus');
+    })
+    .catch(console.log);
 })
 
 module.exports = router;

@@ -27,16 +27,18 @@
 
 	<div class="content">
 		
-		<%if(message)%>
-		<%=message%>
+		
 
 
 		<br/><br/>
 		
-		<form action = "/companyHome/newjob" method = "post">
-			<label>Role: </label> <input type = "text" name = "role"> <br/>
-			<label>Place: </label> <input type = "text" name = "place"> <br/>
-			<label>Requirements: </label> <input type = "text" name = "requirements"> <br/>
+		<form action = "/companyHome/aboutus" method = "post">
+			<label>Company Name: </label> <input type = "text" name = "companyname" value = "<%=data['Company name'] %>"> <br/><br/>
+			<label>About: </label> <textarea name = "about" >
+				<%=data.About %>
+			</textarea> <br/>
+			<label>Established Date: </label> <input type = "date" name = "estdate" value = "<%=data['Established Date'] %>"> <br/>
+			<label>No of employees: </label> <input type = "number" name = "empcount" value = "<%=data['No of Employee'] %>"> <br/>
 			<input type = "submit">
 		</form>
 	</div>
